@@ -1,2 +1,2 @@
 # my-api-rest
-Building CRUD API RESt
+Building CRUD API REST
