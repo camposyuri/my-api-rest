@@ -11,7 +11,7 @@ module.exports = (app) => {
     try {
       existsOrError(user.name, "Name not informed.");
       existsOrError(user.email, "Email not informed.");
-      // existsOrError(user.admin, "Admin not informed.");
+      // notNumber(user.name, "Name is not valid");
     } catch (msg) {
       res.status(400).send(msg);
     }
