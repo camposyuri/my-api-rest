@@ -1,5 +1,5 @@
 module.exports = (app) => {
-  const { existsOrError } = app.api.validation;
+  const { existsOrError, emailValidate, notNull } = app.api.validation;
 
   const save = (req, res) => {
     const user = { ...req.body };
@@ -9,10 +9,21 @@ module.exports = (app) => {
     }
 
     try {
-      existsOrError(user.name, "Name not informed.");
-      existsOrError(user.email, "Email not informed.");
+      notNull(user.name, "Name not informed.");
+      notNull(user.email, "Email not informed.");
+
+      app
+        .db("users")
+        .insert(user)
+        .then((_) => res.status(204).send())
+        .catch((err) => res.status(500).send(err));
+
+      // emailValidate(user.email, "Email is not valid.");
+      // existsOrError(user.name, "Name not informed.");
+      // existsOrError(user.email, "Email not informed.");
       // notNumber(user.name, "Name is not valid");
     } catch (msg) {
+      console.log("HERE");
       res.status(400).send(msg);
     }
 
@@ -23,13 +34,9 @@ module.exports = (app) => {
         .where({ id: user.id })
         .then((_) => res.status(204).send())
         .catch((err) => res.status(500).send(err));
-    } else {
-      app
-        .db("users")
-        .insert(user)
-        .then((_) => res.status(204).send())
-        .catch((err) => res.status(500).send(err));
     }
+
+    // else {}
   };
 
   const remove = async (req, res) => {
