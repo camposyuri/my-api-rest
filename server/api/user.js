@@ -12,31 +12,16 @@ module.exports = (app) => {
       notNull(user.name, "Name not informed.");
       notNull(user.email, "Email not informed.");
 
+      emailValidate(user.email, "Email is not valid.");
+
       app
         .db("users")
         .insert(user)
         .then((_) => res.status(204).send())
         .catch((err) => res.status(500).send(err));
-
-      // emailValidate(user.email, "Email is not valid.");
-      // existsOrError(user.name, "Name not informed.");
-      // existsOrError(user.email, "Email not informed.");
-      // notNumber(user.name, "Name is not valid");
     } catch (msg) {
-      console.log("HERE");
       res.status(400).send(msg);
     }
-
-    if (user.id) {
-      app
-        .db("users")
-        .update(user)
-        .where({ id: user.id })
-        .then((_) => res.status(204).send())
-        .catch((err) => res.status(500).send(err));
-    }
-
-    // else {}
   };
 
   const remove = async (req, res) => {
@@ -94,3 +79,11 @@ module.exports = (app) => {
 
   return { save, remove, get, getById };
 };
+// if (user.id) {
+//   app
+//     .db("users")
+//     .update(user)
+//     .where({ id: user.id })
+//     .then((_) => res.status(204).send())
+//     .catch((err) => res.status(500).send(err));
+// }
