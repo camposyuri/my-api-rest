@@ -11,8 +11,9 @@ module.exports = (app) => {
       console.log("AEASasasa");
       return msg;
     } else {
-      console.log("AEAS");
-      return false;
+      throw new Error(msg);
+      // console.log("AEAS");
+      // return false;
     }
   }
 
