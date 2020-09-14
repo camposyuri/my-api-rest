@@ -9,9 +9,9 @@ module.exports = (app) => {
     const valueEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/g;
     if (valueEmail.test(value)) {
       console.log("AEASasasa");
-      return msg;
+      return;
     } else {
-      throw new Error(msg);
+      throw msg;
       // console.log("AEAS");
       // return false;
     }
