@@ -3,6 +3,6 @@ module.exports = (app) => {
   app
     .route("/users/:id")
     .get(app.api.user.getById)
-    .put(app.api.user.save)
+    .put(app.api.user.alterUser)
     .delete(app.api.user.remove);
 };

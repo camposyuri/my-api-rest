@@ -77,13 +77,20 @@ module.exports = (app) => {
       .catch((err) => res.status(500).send(err));
   };
 
-  return { save, remove, get, getById };
+  const alterUser = (req, res) => {
+    const user = { ...req.body };
+
+    if (req.params.id) {
+      user.id = req.params.id;
+    }
+
+    app
+      .db("users")
+      .update(user)
+      .where({ id: user.id })
+      .then((_) => res.status(204).send())
+      .catch((err) => res.status(500).send(err));
+  };
+
+  return { save, remove, get, getById, alterUser };
 };
-// if (user.id) {
-//   app
-//     .db("users")
-//     .update(user)
-//     .where({ id: user.id })
-//     .then((_) => res.status(204).send())
-//     .catch((err) => res.status(500).send(err));
-// }

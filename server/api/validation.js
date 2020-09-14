@@ -8,12 +8,9 @@ module.exports = (app) => {
   function emailValidate(value, msg) {
     const valueEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/g;
     if (valueEmail.test(value)) {
-      console.log("AEASasasa");
       return;
     } else {
       throw msg;
-      // console.log("AEAS");
-      // return false;
     }
   }
 
@@ -31,26 +28,9 @@ module.exports = (app) => {
     }
   }
 
-  // function notExistsOrError(value, msg) {
-  //   try {
-  //     existsOrError(value, msg);
-  //   } catch (msg) {
-  //     return;
-  //   }
-  //   throw msg;
-  // }
-
-  // function equalsOrError(valueA, valueB, msg) {
-  //   if (valueA !== valueB) {
-  //     throw msg;
-  //   }
-  // }
-
   return {
     emailValidate,
     notNull,
     existsOrError,
-    // notExistsOrError,
-    // equalsOrError,
   };
 };
