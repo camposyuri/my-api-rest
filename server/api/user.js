@@ -98,23 +98,13 @@ module.exports = (app) => {
     if (req.params.id) {
       user.id = req.params.id;
     }
-
-    try {
-      notNull(user.name, "Name not informed.");
-      notNull(user.email, "Email not informed.");
-
-      emailValidate(user.email, "Email not valid.");
-
-      app
-        .db("users")
-        .where({ id: user.id })
-        .update(user)
-        .returning("*")
-        .then((_) => res.status(204).send())
-        .catch((err) => res.status(500).send(err));
-    } catch (msg) {
-      res.status(400).send(msg);
-    }
+    app
+      .db("users")
+      .where({ id: user.id })
+      .update(user)
+      .returning("*")
+      .then((_) => res.status(204).send())
+      .catch((err) => res.status(500).send(err));
   };
 
   return { save, remove, get, getById, alterUser, alterPatch };
